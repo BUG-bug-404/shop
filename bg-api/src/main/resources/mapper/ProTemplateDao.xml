@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.template.ProTemplateDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.template.ProTemplate" id="proTemplateMap">
+        <result property="id" column="id"/>
+        <result property="feightTemplateId" column="feight_template_id"/>
+        <result property="firstUnit" column="first_unit"/>
+        <result property="firstFee" column="first_fee"/>
+        <result property="continueUnit" column="continue_unit"/>
+        <result property="continueFee" column="continue_fee"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="region" column="region"/>
+
+        <result property="userAdminId" column="user_admin_id"/>
+    </resultMap>
+
+
+</mapper>

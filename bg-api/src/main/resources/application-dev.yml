@@ -1,0 +1,107 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://112.126.64.112:3306/gyl_Item?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+      #        url: jdbc:mysql://127.0.0.1:3306/gyl_item?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+      username: root
+      password: Q!W@E#902suoyang!@#
+      #        password: 123456
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      #Oracle需要打开注释
+      #validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        #login-username: admin
+        #login-password: admin
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+  redis:
+    database: 0
+    host: 112.126.64.112
+    port: 6379
+    password: 123456
+    timeout: 6000ms  # 连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10      # 连接池中的最大空闲连接
+        min-idle: 5       # 连接池中的最小空闲连接
+
+
+
+#swagger true启用 false停用
+swagger:
+  enable: true
+
+
+#小程序
+wxxcx:
+  appID: wx2bcd532cf2aa1f38
+  appSecret: fdf02d038abcab10cad2a270a3a8184e
+
+#小程序支付
+pay:
+  APPID: wx2bcd532cf2aa1f38
+  APPSECRT: fdf02d038abcab10cad2a270a3a8184e
+  #商户id
+  MCH_ID: 1535221551
+  #商户密钥
+  MCH_KEY: 59abfbba1984d38bb0de473fdf725e0d
+  #签名加密方式
+  SIGN_TYPE: MD5
+  #/微信支付证书名称
+  keyPath: classpath:apiclient_cert.p12
+
+
+##-------鉴权需要的 AccessKey（AK）---
+
+##-------鉴权需要的 AccessKey（AK）---
+rocketmq:
+  accessKey: LTAI4GFW3ofxKQ5zZ8jcyiv9
+  secretKey: 8znvFkMZLUHuj7ZSE0kXtx3OZUs8Vx
+  ## 实例TCP 协议公网接入地址
+  nameSrvAddr: http://MQ_INST_1271489534155209_BcpYtjCc.cn-beijing.mq-internal.aliyuncs.com:8080
+  #普通消息topic
+  topic: top-admin
+  groupId: GID_top
+  tag: userMessage1 || userMessage2 || userMessage3 || userMessage4 || userMessage5
+  #定时/延时消息
+  timeTopic: shop-time
+  timeGroupId: GID_shop
+  timeTag: time-01 || time-02 || time-03 || time-04 || time-05 || time-06 || time-07 || time-08 || time-09 || time-10
+  #分区顺序
+  fifoTopic: fifo-lapse
+  fifoGroupId: GID_fifo
+  fifoTag: fifo-01 || fifo-02
+
+#---阿里短信服务---
+#----杭州硕旸科技有限公司
+#--- \u676d\u5dde\u7855\u65f8\u79d1\u6280\u6709\u9650\u516c\u53f8
+#---登录确认验证码     SMS_190510543
+#---用户注册验证码     SMS_190510541
+#---修改密码验证码     SMS_190510540
+sms:
+  AccessKeyId: LTAI4GKfPq8VHroPcTHTGC7Z
+  AccessKeySecret: esKMTJfYiH3F67Nivt4XuQdTPPEale
+  TemplateCode: SMS_190510541
+  signName: 杭州硕旸科技有限公司

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.order.OrderOrderDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.order.OrderOrder" id="orderOrderMap">
+        <result property="id" column="id"/>
+        <result property="productId" column="product_id"/>
+        <result property="userAdminId" column="user_admin_id"/>
+        <result property="userMemberId" column="user_member_id"/>
+        <result property="orderSn" column="order_sn"/>
+        <result property="createTime" column="create_time"/>
+        <result property="memberUsername" column="member_username"/>
+        <result property="totalAmount" column="total_amount"/>
+        <result property="payAmount" column="pay_amount"/>
+        <result property="freightAmount" column="freight_amount"/>
+        <result property="payType" column="pay_type"/>
+        <result property="status" column="status"/>
+        <result property="orderType" column="order_type"/>
+        <result property="deliverySn" column="delivery_sn"/>
+        <result property="autoConfirmDay" column="auto_confirm_day"/>
+        <result property="promotionInfo" column="promotion_info"/>
+        <result property="billType" column="bill_type"/>
+        <result property="preStatus" column="pre_status"/>
+        <result property="receiveAddressId" column="receive_address_id"/>
+        <result property="billId" column="bill_id"/>
+        <result property="note" column="note"/>
+        <result property="confirmStatus" column="confirm_status"/>
+        <result property="deleteStatus" column="delete_status"/>
+        <result property="paymentTime" column="payment_time"/>
+        <result property="deliveryTime" column="delivery_time"/>
+        <result property="receiveTime" column="receive_time"/>
+        <result property="commentTime" column="comment_time"/>
+        <result property="modifyTime" column="modify_time"/>
+        <result property="closeAccount" column="close_account"/>
+        <result property="thirdOrderSn" column="third_order_sn"/>
+    </resultMap>
+
+    <select id="selectAllOrder" resultType="com.keith.modules.entity.order.Order" parameterType="java.lang.Object">
+        SELECT
+        o.product_id productId,
+        o.user_member_id userMemberId,
+        o.order_sn orderSn,
+        o.create_time createTime,
+        o.total_amount totalAmount,
+        o.pay_type payType,
+        o.`status` STATUS,
+        o.order_type orderType,
+        o.receive_address_id receiveAddressId,
+        o.confirm_status confirmStatus,
+        o.delete_status deleteStatus,
+        o.delivery_sn deliverySn,
+        i.product_name productName,
+        i.product_pic productPic,
+        i.product_quantity productQuantity,
+        i.product_sku_id productSkuId,
+        i.product_attr productAttr,
+        ra.receive_name receiveName,
+        ra.phone phone,
+        ra.detail_time detailTime
+        FROM
+        order_order o,
+        order_item i,
+        user_receive_address ra
+        WHERE
+        o.order_sn = i.order_sn
+        AND ra.id = o.receive_address_id
+        AND o.user_member_id =#{userMemberId}
+        <if test="productName!=null and  productName!=''">
+            AND  productName=#{productName}
+        </if>
+        <if test="receiveName!=null and receiveName!=''">
+            AND  receiveName=#{receiveName}
+        </if>
+        <if test="phone!=null and phone!=''">
+            AND phone=#{phone}
+        </if>
+        <if test="detailTime!=null and detailTime!=''">
+            AND detailTime=#{detailTime}
+        </if>
+
+        ORDER BY  createTime  LIMIT ${page},${pageSize}
+
+    </select>
+
+    <select id="selectAllOrderTrack" resultType="com.keith.modules.entity.order.Order" parameterType="java.lang.Object">
+        SELECT
+        o.product_id productId,
+        o.user_member_id userMemberId,
+        o.order_sn orderSn,
+        o.create_time createTime,
+        o.total_amount totalAmount,
+        o.pay_type payType,
+        o.`status` STATUS,
+        o.order_type orderType,
+        o.receive_address_id receiveAddressId,
+        o.confirm_status confirmStatus,
+        o.delete_status deleteStatus,
+        o.delivery_sn deliverySn,
+        it.product_name productName,
+        it.product_pic productPic,
+        it.total,
+        it.dai,
+        it.product_sku_id productSkuId,
+        it.product_attr productAttr
+        FROM
+        order_order o
+        LEFT JOIN (
+        SELECT
+        i.order_sn,
+        i.product_name,
+        i.product_pic,
+        i.product_quantity,
+        i.product_sku_id,
+        i.product_attr,
+        SUM( s.product_quantity ) total,
+        SUM( a.product_quantity ) dai
+        FROM
+        order_item i
+        LEFT JOIN ( SELECT order_sn, product_quantity FROM order_item WHERE DATE_SUB( CURDATE( ), INTERVAL #{day} DAY ) <![CDATA[<=]]> date( create_time ) GROUP BY order_sn ) s ON s.order_sn = i.order_sn
+        LEFT JOIN (
+        SELECT
+        order_sn,
+        product_quantity
+        FROM
+        order_item
+        WHERE
+        order_sn =(
+        SELECT
+        order_sn
+        FROM
+        order_order
+        WHERE
+        DATE_SUB( CURDATE( ), INTERVAL #{day} DAY ) <![CDATA[<=]]> date( create_time )
+        AND `status` = 3
+        )
+        GROUP BY
+        order_sn
+        ) a ON a.order_sn = i.order_sn
+        AND DATE_SUB( CURDATE( ), INTERVAL #{day} DAY ) <![CDATA[<=]]> date( create_time )
+        GROUP BY
+        i.order_sn
+        ) it ON it.order_sn = o.order_sn
+        WHERE DATE_SUB( CURDATE( ), INTERVAL #{day} DAY ) <![CDATA[<=]]> date( o.create_time )
+        AND o.user_member_id =#{userMemberId} AND o.`status`=#{status}
+
+        ORDER BY  createTime  LIMIT ${page},${pageSize}
+
+    </select>
+
+
+    <select id="selectByOrderSn" resultType="com.keith.modules.entity.order.Order" parameterType="java.lang.Object">
+        SELECT
+        o.product_id productId,
+        o.user_member_id userMemberId,
+        o.order_sn orderSn,
+        o.create_time createTime,
+        o.total_amount totalAmount,
+        o.pay_type payType,
+        o.`status` STATUS,
+        o.order_type orderType,
+        o.receive_address_id receiveAddressId,
+        o.confirm_status confirmStatus,
+        o.delete_status deleteStatus,
+        o.delivery_sn deliverySn,
+        i.product_name productName,
+        i.product_pic productPic,
+        i.product_quantity productQuantity,
+        i.product_sku_id productSkuId,
+        i.product_attr productAttr,
+        ra.receive_name receiveName,
+        ra.phone phone,
+        ra.detail_time detailTime
+        FROM
+        order_order o,
+        order_item i,
+        user_receive_address ra
+        WHERE
+        o.order_sn = i.order_sn
+        AND ra.id = o.receive_address_id
+        AND o.user_member_id =#{userMemberId}
+        AND  o.order_sn=#{orderSn}
+
+    </select>
+    <select id="getCountForUser" resultType="com.keith.modules.entity.order.Order" parameterType="java.lang.Object">
+        SELECT
+            user_member_id
+        FROM
+            order_order
+        WHERE
+            user_admin_id != user_member_id
+            AND STATUS = 4
+            AND user_member_id != #{userMemberId}
+            AND user_admin_id =#{userMemberId}
+
+
+    </select>
+</mapper>

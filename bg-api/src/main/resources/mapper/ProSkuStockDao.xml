@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.product.ProSkuStockDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.product.ProSkuStock" id="proSkuStockMap">
+        <result property="id" column="id"/>
+        <result property="productId" column="product_id"/>
+        <result property="skuCode" column="sku_code"/>
+        <result property="price" column="price"/>
+        <result property="stock" column="stock"/>
+        <result property="lowStock" column="low_stock"/>
+        <result property="sp1" column="sp1"/>
+        <result property="sp2" column="sp2"/>
+        <result property="sp3" column="sp3"/>
+        <result property="pic" column="pic"/>
+        <result property="sale" column="sale"/>
+        <result property="promotionPrice" column="promotion_price"/>
+        <result property="lockStock" column="lock_stock"/>
+        <result property="platformPrice" column="platform_price"/>
+        <result property="platformSalePrice" column="platform_sale_price"/>
+        <result property="createPerson" column="create_person"/>
+        <result property="createTime" column="create_time"/>
+        <result property="changePerson" column="change_person"/>
+        <result property="changeTime" column="change_time"/>
+    </resultMap>
+
+
+</mapper>

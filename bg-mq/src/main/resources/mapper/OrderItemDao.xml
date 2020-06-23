@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.order.OrderItemDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.order.OrderItem" id="orderItemMap">
+        <result property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="orderSn" column="order_sn"/>
+        <result property="productId" column="product_id"/>
+        <result property="userAdminId" column="user_admin_id"/>
+        <result property="productPic" column="product_pic"/>
+        <result property="productName" column="product_name"/>
+        <result property="productSn" column="product_sn"/>
+        <result property="freightAmount" column="freight_amount"/>
+        <result property="deliverySn" column="delivery_sn"/>
+        <result property="productPrice" column="product_price"/>
+        <result property="productQuantity" column="product_quantity"/>
+        <result property="productSkuId" column="product_sku_id"/>
+        <result property="productSkuCode" column="product_sku_code"/>
+        <result property="productCategoryId" column="product_category_id"/>
+        <result property="productAttr" column="product_attr"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+</mapper>

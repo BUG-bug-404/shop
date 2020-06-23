@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.user.UserMemberDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.user.UserMember" id="userMemberMap">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="mobile" property="mobile"/>
+        <result column="payment_code" property="paymentCode"/>
+        <result column="password" property="password"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="city" property="city"/>
+        <result column="fullname" property="fullname"/>
+        <result column="id_status" property="idStatus"/>
+        <result column="invite_code" property="inviteCode"/>
+        <result column="pic" property="pic"/>
+        <result column="type" property="type"/>
+        <result column="register_benrfits" property="registerBenrfits"/>
+        <result column="level_id" property="levelId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="identifier_name" property="identifierName"/>
+        <result column="profession_id" property="professionId"/>
+        <result column="note" property="note"/>
+        <result column="open_id" property="openId"/>
+        <result column="union_id" property="unionId"/>
+        <result column="invite_count" property="inviteCount"/>
+        <result column="commission_time" property="commissionTime"/>
+        <result column="wx_session_key" property="wxSessionKey"/>
+    </resultMap>
+    <select id="getNoSub" parameterType="com.keith.modules.entity.user.UserMember" resultType="com.keith.modules.entity.user.UserMember">
+
+        SELECT
+            *
+        FROM
+            user_member
+        WHERE
+            id NOT IN (
+            SELECT DISTINCT
+                parent_id
+            FROM
+                user_member
+            WHERE
+            parent_id IS NOT NULL
+            )
+            AND level_id>1
+    </select>
+
+</mapper>

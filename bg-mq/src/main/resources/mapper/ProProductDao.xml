@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.product.ProProductDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.product.ProProduct" id="proProductMap">
+        <result property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="userAdminId" column="user_admin_id"/>
+        <result property="productAttributeCategoryId" column="product_attribute_category_id"/>
+        <result property="productName" column="product_name"/>
+        <result property="productCode" column="product_code"/>
+        <result property="deleteStatus" column="delete_status"/>
+        <result property="verifyStatus" column="verify_status"/>
+        <result property="publishStatus" column="publish_status"/>
+        <result property="sale" column="sale"/>
+        <result property="supplierPrice" column="supplier_price"/>
+        <result property="subTitle" column="sub_title"/>
+        <result property="description" column="description"/>
+        <result property="previewStatus" column="preview_status"/>
+        <result property="unifyStatus" column="unify_status"/>
+        <result property="serviceIds" column="service_ids"/>
+        <result property="keywords" column="keywords"/>
+        <result property="tag" column="tag"/>
+        <result property="note" column="note"/>
+        <result property="detailTitle" column="detail_title"/>
+        <result property="detailDesc" column="detail_desc"/>
+        <result property="detailHtml" column="detail_html"/>
+        <result property="detailMobileHtml" column="detail_mobile_html"/>
+        <result property="productCategoryName" column="product_category_name"/>
+        <result property="productAddress" column="product_address"/>
+        <result property="templateId" column="template_id"/>
+        <result property="postageStatus" column="postage_status"/>
+        <result property="finalPay" column="final_pay"/>
+        <result property="platformPrice" column="platform_price"/>
+        <result property="salePrice" column="sale_price"/>
+        <result property="createPerson" column="create_person"/>
+        <result property="createTime" column="create_time"/>
+        <result property="changePerson" column="change_person"/>
+        <result property="changeTime" column="change_time"/>
+        <result property="publishTime" column="publish_time"/>
+        <result property="isCloud" column="is_cloud"/>
+        <result property="cloudPublishStatus" column="cloud_publish_status"/>
+        <result property="cloudPublishTime" column="cloud_publish_time"/>
+        <result property="extCount" column="ext_count"/>
+        <result property="pvCount" column="pv_count"/>
+        <result property="orderCount" column="order_count"/>
+        <result property="totalNum" column="total_num"/>
+    </resultMap>
+
+
+</mapper>

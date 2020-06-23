@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.record.StoreRecordDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.record.StoreRecord" id="storeRecordMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="orderId" column="order_id"/>
+        <result property="costFee" column="cost_fee"/>
+        <result property="productName" column="product_name"/>
+        <result property="productId" column="product_id"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <select id="getAll" parameterType="com.keith.modules.entity.record.StoreRecord" resultType="com.keith.modules.entity.record.StoreRecord">
+        SELECT
+            SUM(cost_fee) AS costFee
+        FROM
+            store_record
+        WHERE
+            user_id = #{userId}
+
+    </select>
+    <select id="getMonth" parameterType="com.keith.modules.entity.record.StoreRecord" resultType="com.keith.modules.entity.record.StoreRecord">
+        SELECT
+            SUM(cost_fee) AS costFee
+        FROM
+            store_record
+        WHERE
+            date_format( create_time, '%Y-%m' )= date_format(
+                now(),
+            '%Y-%m')
+         AND user_id = #{userId}
+
+    </select>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.product.ConWelfareDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.product.ConWelfare" id="conWelfareMap">
+        <result property="id" column="id"/>
+        <result property="productId" column="product_id"/>
+        <result property="productPic" column="product_pic"/>
+        <result property="proSkuStockId" column="pro_sku_stock_id"/>
+        <result property="skuValue" column="sku_value"/>
+        <result property="productName" column="product_name"/>
+        <result property="publishStatus" column="publish_status"/>
+        <result property="publishTime" column="publish_time"/>
+        <result property="welfarePrice" column="welfare_price"/>
+        <result property="sort" column="sort"/>
+        <result property="limitCount" column="limit_count"/>
+        <result property="createTime" column="create_time"/>
+        <result property="productCategoryId" column="product_category_id"/>
+        <result property="productCode" column="product_code"/>
+    </resultMap>
+
+
+</mapper>

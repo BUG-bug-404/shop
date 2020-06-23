@@ -1,0 +1,21 @@
+package com.keith.modules.dao.withdraw;
+
+import com.keith.modules.entity.withdraw.UserMemberWithdraw;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+/**
+ * 提现申请表
+ * 
+ * @author lijinxiang
+ * @email @qq.com
+ * @date 2020-06-13 13:47:48
+ */
+@Mapper
+public interface UserMemberWithdrawDao extends BaseMapper<UserMemberWithdraw> {
+    @Select("SELECT COUNT(id) FROM user_member_withdraw WHERE DATE_FORMAT( create_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) AND user_member_id =#{userId}")
+    int countNum(@Param("userId") long userId);
+	
+}

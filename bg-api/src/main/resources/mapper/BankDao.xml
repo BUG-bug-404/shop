@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.bank.BankDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.bank.Bank" id="bankMap">
+        <result property="id" column="id"/>
+        <result property="bankNo" column="bank_no"/>
+        <result property="trueName" column="true_name"/>
+        <result property="bankCode" column="bank_code"/>
+        <result property="userId" column="user_id"/>
+        <result property="createDate" column="create_date"/>
+        <result property="bankName" column="bank_name"/>
+    </resultMap>
+
+
+</mapper>

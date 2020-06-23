@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.product.ProProductDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.product.ProProduct" id="proProductMap">
+        <result property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="userAdminId" column="user_admin_id"/>
+        <result property="productAttributeCategoryId" column="product_attribute_category_id"/>
+        <result property="productName" column="product_name"/>
+        <result property="productCode" column="product_code"/>
+        <result property="deleteStatus" column="delete_status"/>
+        <result property="verifyStatus" column="verify_status"/>
+        <result property="publishStatus" column="publish_status"/>
+        <result property="sale" column="sale"/>
+        <result property="supplierPrice" column="supplier_price"/>
+        <result property="subTitle" column="sub_title"/>
+        <result property="description" column="description"/>
+        <result property="previewStatus" column="preview_status"/>
+        <result property="unifyStatus" column="unify_status"/>
+        <result property="serviceIds" column="service_ids"/>
+        <result property="keywords" column="keywords"/>
+        <result property="tag" column="tag"/>
+        <result property="note" column="note"/>
+        <result property="detailTitle" column="detail_title"/>
+        <result property="detailDesc" column="detail_desc"/>
+        <result property="detailHtml" column="detail_html"/>
+        <result property="detailMobileHtml" column="detail_mobile_html"/>
+        <result property="productCategoryName" column="product_category_name"/>
+        <result property="productAddress" column="product_address"/>
+        <result property="templateId" column="template_id"/>
+        <result property="postageStatus" column="postage_status"/>
+        <result property="finalPay" column="final_pay"/>
+        <result property="platformPrice" column="platform_price"/>
+        <result property="salePrice" column="sale_price"/>
+        <result property="createPerson" column="create_person"/>
+        <result property="createTime" column="create_time"/>
+        <result property="changePerson" column="change_person"/>
+        <result property="changeTime" column="change_time"/>
+        <result property="publishTime" column="publish_time"/>
+        <result property="isCloud" column="is_cloud"/>
+        <result property="cloudPublishStatus" column="cloud_publish_status"/>
+        <result property="cloudPublishTime" column="cloud_publish_time"/>
+        <result property="extCount" column="ext_count"/>
+        <result property="pvCount" column="pv_count"/>
+        <result property="orderCount" column="order_count"/>
+        <result property="totalNum" column="total_num"/>
+    </resultMap>
+    <select id="getProList" resultType="com.keith.modules.entity.product.ProProduct">
+        select
+        pro_product.*,
+        (
+        SELECT
+        pro_album.pic
+        FROM
+        pro_product
+        LEFT JOIN pro_album ON pro_product.id = pro_album.product_id
+        WHERE
+        pro_album.cover_status = 0
+        and pro_album.pic_owner = 1
+        LIMIT 1
+        ) AS pic
+        from
+        pro_product
+        where pro_product.delete_status = 0
+        and pro_product.verify_status = 1
+        and pro_product.publish_status = 1
+        and pro_product.parent_id != ''
+        <if test="lowPrice != null and highPrice != null">
+            and pro_product.platform_price &gt;= #{lowPrice}
+        </if>
+        <if test="highPrice != null and highPrice != null">
+            and pro_product.platform_price &lt;= #{highPrice}
+        </if>
+        <if test="categoryId != null">
+            and pro_product.product_attribute_category_id = #{categoryId}
+        </if>
+        <if test="sortType == null">
+            order by pro_product.publish_time desc
+        </if>
+        <if test='sortType != null and sortType == "0"'>
+            order by pro_product.sale desc
+        </if>
+        <if test='sortType != null and sortType == "1"'>
+            order by pro_product.pv_count desc
+        </if>
+        <if test='sortType == "2"'>
+            order by pro_product.ext_count desc
+        </if>
+        <if test='sortType == "3"'>
+            order by pro_product.publish_time desc
+        </if>
+        <if test='sortType == "4"'>
+            order by pro_product.order_count desc
+        </if>
+
+    </select>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="proProductMap">
+        select id,product_name,parent_id,product_attribute_category_id,platform_price, sale_price ,create_time
+        from pro_product
+        where
+        match(product_name,sub_title) against(#{productName})
+        and delete_status = 0
+        and verify_status = 1
+        and publish_status = 1
+        and parent_id is not null
+         order by create_time desc
+    </select>
+
+
+    <select id="selectByUserId" parameterType="java.lang.Long" resultMap="proProductMap">
+        select product_name,id,description from pro_product where id
+        in (
+            select product_id from (
+                select pss.product_id ,sum(pss.stock) as stock from pro_product pp
+                LEFT JOIN pro_sku_stock pss on pp.id = pss.product_id
+                left join ext_product ep on pp.id = ep.product_id  where ep.user_member_id = #{userId} GROUP BY pss.stock
+                )b where stock =0
+        )and parent_id IS NOT NULL
+        AND delete_status = 0
+        AND verify_status = 1
+        AND publish_status = 1
+    </select>
+
+</mapper>

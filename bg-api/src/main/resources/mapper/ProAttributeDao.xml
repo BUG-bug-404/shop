@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.product.ProAttributeDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.product.ProAttribute" id="proAttributeMap">
+        <result property="id" column="id"/>
+        <result property="productId" column="product_id"/>
+        <result property="productAttributeCategoryId" column="product_attribute_category_id"/>
+        <result property="name" column="name"/>
+        <result property="selectType" column="select_type"/>
+        <result property="inputType" column="input_type"/>
+        <result property="inputList" column="input_list"/>
+        <result property="sort" column="sort"/>
+        <result property="filterType" column="filter_type"/>
+        <result property="searchType" column="search_type"/>
+        <result property="relatedStatus" column="related_status"/>
+        <result property="handAddStatus" column="hand_add_status"/>
+        <result property="type" column="type"/>
+        <result property="createPerson" column="create_person"/>
+        <result property="createTime" column="create_time"/>
+        <result property="changePerson" column="change_person"/>
+        <result property="changeTime" column="change_time"/>
+    </resultMap>
+
+
+</mapper>

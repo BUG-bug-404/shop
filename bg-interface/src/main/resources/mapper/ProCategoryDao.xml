@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.ProCategoryMapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.product.ProCategory" id="proCategoryMap">
+        <result property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="name" column="name"/>
+        <result property="level" column="level"/>
+        <result property="productCount" column="product_count"/>
+        <result property="productUnit" column="product_unit"/>
+        <result property="navStatus" column="nav_status"/>
+        <result property="showStatus" column="show_status"/>
+        <result property="sort" column="sort"/>
+        <result property="icon" column="icon"/>
+        <result property="keywords" column="keywords"/>
+        <result property="description" column="description"/>
+        <result property="createPerson" column="create_person"/>
+        <result property="createTime" column="create_time"/>
+        <result property="changePerson" column="change_person"/>
+        <result property="changeTime" column="change_time"/>
+    </resultMap>
+
+
+</mapper>

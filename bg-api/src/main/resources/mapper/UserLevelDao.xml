@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.user.UserLevelDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.user.UserLevel" id="userLevelMap">
+        <result property="id" column="id"/>
+        <result property="levelName" column="level_name"/>
+        <result property="levelDiscount" column="level_discount"/>
+        <result property="levelAwardMoney" column="level_award_money"/>
+        <result property="subRate" column="sub_rate"/>
+        <result property="resubRate" column="resub_rate"/>
+        <result property="rate" column="rate"/>
+        <result property="defaultRate" column="default_rate"/>
+        <result property="selfBuyWelfare" column="self_buy_welfare"/>
+        <result property="levelAuthority" column="level_authority"/>
+    </resultMap>
+
+
+</mapper>

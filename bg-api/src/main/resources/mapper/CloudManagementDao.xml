@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.product.CloudManagementDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.product.CloudManagement" id="cloudManagementMap">
+        <result property="id" column="id"/>
+        <result property="productId" column="product_id"/>
+        <result property="proSkuStockId" column="pro_sku_stock_id"/>
+        <result property="cloudStorageId" column="cloud_storage_id"/>
+        <result property="acitivityPrice" column="acitivity_price"/>
+        <result property="stock" column="stock"/>
+        <result property="activityStock" column="activity_stock"/>
+        <result property="platformPrice" column="platform_price"/>
+        <result property="repoPrice" column="repo_price"/>
+        <result property="repoTime" column="repo_time"/>
+        <result property="publishStatus" column="publish_status"/>
+        <result property="publishTime" column="publish_time"/>
+        <result property="range1StartTime" column="range1_start_time"/>
+        <result property="range2StartTime" column="range2_start_time"/>
+        <result property="range1EndTime" column="range1_end_time"/>
+        <result property="range2EndTime" column="range2_end_time"/>
+        <result property="range1Discount" column="range1_discount"/>
+        <result property="range2Discount" column="range2_discount"/>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,82 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://rm-bp1a626jhmhguy208rw.mysql.rds.aliyuncs.com:3306/db_zkzb?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE&allowMultiQueries=true&serverTimezone=UTC
+      username: zhikezhibo
+      password: Zhikezhibo2018
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      #Oracle需要打开注释
+      #validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        #login-username: admin
+        #login-password: admin
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+  redis:
+    database: 0
+    host: zhikeredis2.redis.rds.aliyuncs.com
+    port: 6379
+    password: Huan313235288
+    timeout: 6000ms  # 连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10      # 连接池中的最大空闲连接
+        min-idle: 5       # 连接池中的最小空闲连接
+
+#验证码超时时间 单位：秒
+smsCode:
+  expire: 60000
+
+#APP 版本号 1 有新版本但不强更新  2 强更新
+is_forced_update: 1
+
+#swagger true启用 false停用
+swagger:
+  enable: true
+
+#网易SMS
+w:
+  key: 91d3789dbcc7410a47b59a052c40d3d6
+  secret: ac81abb5248c
+##-------鉴权需要的 AccessKey（AK）---
+rocketmq:
+  accessKey: LTAIRcrZCBL6b7Zv
+  secretKey: fEL4pcOqoCM3Zs69cvGo1tMTGAmyEI
+  ## 实例TCP 协议公网接入地址
+  nameSrvAddr: http://onsaddr.cn-hangzhou.mq-internal.aliyuncs.com:8080
+  #普通消息topic
+  topic: shop-topic
+  groupId: GID_shop
+  tag: userMessage1 || userMessage2 || userMessage3 || userMessage4 || userMessage5
+  #定时/延时消息
+  timeTopic: time-lapse
+  timeGroupId: GID-message
+  timeTag: time-01 || time-02
+  #分区顺序
+  fifoTopic: fifo-lapse
+  fifoGroupId: GID_fifo
+  fifoTag: fifo-01 || fifo-02
+
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keith.modules.dao.sub.SubAccountUserDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.keith.modules.entity.sub.SubAccountUser" id="subAccountUserMap">
+        <result property="id" column="id"/>
+        <result property="type" column="type"/>
+        <result property="account" column="account"/>
+        <result property="name" column="name"/>
+        <result property="relationType" column="relation_type"/>
+        <result property="customRelation" column="custom_relation"/>
+        <result property="createTime" column="create_time"/>
+        <result property="shopId" column="shop_id"/>
+    </resultMap>
+
+
+</mapper>
